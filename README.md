@@ -1,5 +1,5 @@
-# Sistema-Sebo-Web
-# 📚 Sistema Web de Gestão de Sebo
+# Acervo Sebos
+# 📚 Sistema Web de Gestão de Sebos
 
 ## 🧾 Sobre o Projeto
 Este projeto consiste no desenvolvimento de um sistema web para gestão digital de sebos (livrarias de livros usados), permitindo o controle de estoque, cadastro de livros, clientes e vendas.
