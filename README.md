@@ -1,6 +1,7 @@
 # Acervo Sebos
 # 📚 Sistema Web de Gestão de Sebos
-[Link para acessar o site deste projeto](https://projetointegradorgrupo15.github.io/Sistema-Sebo-Web/)
+[Link para acessar o site deste projeto: ](https://projetointegradorgrupo15.github.io/Sistema-Sebo-Web/)
+https://projetointegradorgrupo15.github.io/Sistema-Sebo-Web/
 
 ## 🧾 Sobre o Projeto
 Este projeto consiste no desenvolvimento de um sistema web para gestão digital de sebos (livrarias de livros usados), permitindo o controle de estoque, cadastro de livros, clientes e vendas.
