@@ -1,0 +1,79 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+.box-menu{
+    background: url('https://images.pexels.com/photos/15128076/pexels-photo-15128076.jpeg?_gl=1*1wkyzzu*_ga*MTY3NjYxOTkwNS4xNzc1MTk5MDY1*_ga_8JE65Q40S6*czE3NzUxOTkwNjQkbzEkZzEkdDE3NzUxOTkyNTMkajU5JGwwJGgw')no-repeat center/cover;
+    height: 100vh;  
+    background-size: cover;
+    width: 100%;
+}
+.logo-img{
+    height: 80px;
+    width: auto;
+    justify-content: left;
+}
+.box-menu .sidebar-menu{
+    height: 100vh;
+    width: 280px;  
+    background-color:#cca071;
+    position: fixed;
+    overflow: hidden;
+    left: -280px;
+    transition: all 0.3s linear;
+}
+.box-menu .sidebar-titulo{
+    position: absolute;
+    height: 80px;
+    width: 100%;
+    box-shadow: 0px 2px 4px #3F2E27;
+}
+.sidebar-menu .menu{
+    position: absolute;
+    top: 80px;  
+    width: 100%;
+}
+.sidebar-menu .menu li{
+    margin: 10px;
+    padding: 14px 20px;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+.sidebar-menu .menu li:hover{
+    background-color: #3F2E27;
+}
+.sidebar-menu .menu i{
+    color: #fff;
+    font-size: 20px;
+    padding-right: 8px;
+}
+.sidebar-menu .menu a{
+    color: #fff;
+    text-decoration: none;
+    font-size: 20px;
+}
+.box-menu .menu-icon i{
+    color: #fff;
+    font-size: 30px;
+    font-weight: 700;
+    position: absolute;
+    left: 16px;
+    line-height: 60px;
+    cursor: pointer;
+}
+.sidebar-menu .btn-open i{
+    font-size: 20px;
+    line-height: 60px;
+    position: absolute;
+    left: 240px;
+    color: #fff;
+    cursor: pointer;
+}
+#check{
+    display: none;
+}
+#check:checked ~ .sidebar-menu{
+    left: 0;
+}
