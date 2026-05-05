@@ -90,7 +90,7 @@ padding: 150px;
 }
 
 .header{
-  background:linear-gradient(140deg, rgba(240, 172, 109, 0),rgb(138, 161, 83)); 
+  background:linear-gradient(140deg,rgb(138, 161, 83), rgb(238, 226, 215, 0.8)); 
   padding: 10px;
   text-align: center; 
   color: rgb(54, 30, 2);
@@ -130,7 +130,7 @@ padding: 150px;
 }
 
 .form button{
-    background:linear-gradient(140deg, rgba(240, 172, 109, 0),rgb(138, 161, 83)); 
+    background:linear-gradient(140deg,rgb(138, 161, 83), rgb(238, 226, 215, 0.8)); 
     width: 40%;
     border-radius: 10px;
     padding: 10px;

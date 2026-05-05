@@ -11,9 +11,11 @@
     width: 100%;
 }
 .logo-img{
-    height: 80px;
+    height: 75px;
     width: auto;
     justify-content: left;
+    margin-left: 15px;
+    margin-top: 8px;
 }
 .box-menu .sidebar-menu{
     height: 100vh;
@@ -29,6 +31,7 @@
     height: 80px;
     width: 100%;
     box-shadow: 0px 2px 4px #3F2E27;
+    
 }
 .sidebar-menu .menu{
     position: absolute;
@@ -42,17 +45,19 @@
     transition: 0.3s;
 }
 .sidebar-menu .menu li:hover{
-    background-color: #3F2E27;
+    background-color: rgb(238, 226, 215, 0.8);
 }
 .sidebar-menu .menu i{
     color: #fff;
     font-size: 20px;
     padding-right: 8px;
+   
 }
 .sidebar-menu .menu a{
-    color: #fff;
+    color:  rgb(54, 30, 2);
     text-decoration: none;
     font-size: 20px;
+    font-weight: bold;
 }
 .box-menu .menu-icon i{
     color: #fff;
