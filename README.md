@@ -25,10 +25,10 @@ O objetivo é facilitar a organização e modernização de pequenos negócios, 
 - JavaScript
 
 ### Backend
-- (ex: Node.js / Django / outro que vocês escolherem)
+- Node.js e Express
 
 ### Banco de Dados
-- (ex: MySQL / PostgreSQL)
+- SQLite3
 
 ### Versionamento
 - Git + GitHub
