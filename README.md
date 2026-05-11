@@ -50,12 +50,7 @@ Projeto desenvolvido por um grupo de 8 integrantes:
 ---
 
 ## 📂 Estrutura do Projeto
-/projeto
-/frontend
-/backend
-/docs
-/database
-README.md
+As páginas HTML, CSS e JS do frontend estão na pasta /src/public.
 
 ---
 
