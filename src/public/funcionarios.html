@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Funcionários - Sebo Sistema</title>
+  <link rel="stylesheet" href="../css/style.css/estillo.css">
+</head>
+
+<body>
+
+<!-- MENU PADRÃO -->
+<header class="topo">
+  <h2>Sebo Sistema</h2>
+
+  <div class="menu">
+    <a href="principal.html">Home</a>
+    <a href="acervo.html">Acervo</a>
+    <a href="cadastro-livros.html">Cadastrar Livro</a>
+    <a href="vendas.html">Vendas</a>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="clientes.html">Clientes</a>
+    <a href="funcionarios.html">Funcionários</a>
+    <a href="login.html" onclick="logout()">Sair</a>
+  </div>
+</header>
+
+<!-- CONTEÚDO -->
+<div class="container">
+
+  <!-- CADASTRO -->
+  <div class="card">
+    <h2>👨‍💼 Cadastro de Funcionários</h2>
+
+    <input id="nome" placeholder="Nome do funcionário"><br><br>
+    <input id="cargo" placeholder="Cargo"><br><br>
+
+    <button onclick="salvarFuncionario()">Salvar</button>
+
+    <p id="msg"></p>
+  </div>
+
+  <!-- LISTA -->
+  <div class="card">
+    <h3>📋 Lista de Funcionários</h3>
+    <ul id="lista-funcionarios"></ul>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Sebo Sistema</p>
+</footer>
+
+<!-- PROTEÇÃO LOGIN -->
+<script src="js/auth.js"></script>
+
+<!-- SCRIPT -->
+<script>
+
+// LOGOUT
+function logout(){
+  localStorage.removeItem("logado");
+}
+
+// SALVAR FUNCIONÁRIO
+function salvarFuncionario(){
+  let nome = document.getElementById("nome").value;
+  let cargo = document.getElementById("cargo").value;
+
+  if(!nome || !cargo){
+    msg.innerText = "Preencha todos os campos!";
+    msg.style.color = "red";
+    return;
+  }
+
+  let funcionarios = JSON.parse(localStorage.getItem("funcionarios")) || [];
+
+  funcionarios.push({nome, cargo});
+
+  localStorage.setItem("funcionarios", JSON.stringify(funcionarios));
+
+  msg.innerText = "Funcionário cadastrado!";
+  msg.style.color = "green";
+
+  document.getElementById("nome").value = "";
+  document.getElementById("cargo").value = "";
+
+  carregarFuncionarios();
+}
+
+// CARREGAR FUNCIONÁRIOS
+function carregarFuncionarios(){
+  let funcionarios = JSON.parse(localStorage.getItem("funcionarios")) || [];
+  let lista = document.getElementById("lista-funcionarios");
+
+  lista.innerHTML = "";
+
+  funcionarios.forEach(f => {
+    lista.innerHTML += `<li>${f.nome} - ${f.cargo}</li>`;
+  });
+}
+
+carregarFuncionarios();
+
+</script>
+
+</body>
+</html>

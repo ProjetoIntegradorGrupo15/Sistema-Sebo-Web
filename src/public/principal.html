@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Sebo Sistema</title>
+
+  <!-- ⚠️ CORREÇÃO DO CAMINHO DO CSS -->
+  <link rel="stylesheet" href="../css/style.css/estillo.css">
+</head>
+
+<body>
+
+<!-- MENU TOPO -->
+<header class="topo">
+  <h2>Sebo Sistema</h2>
+
+  <div class="menu">
+    <a href="principal.html">Home</a>
+    <a href="acervo.html">Acervo</a>
+    <a href="cadastro-livros.html">Cadastrar Livro</a>
+    <a href="vendas.html">Vendas</a>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="clientes.html">Clientes</a>
+    <a href="funcionarios.html">Funcionários</a>
+    <a href="login.html" onclick="logout()">Sair</a>
+  </div>
+</header>
+
+<!-- CONTEÚDO -->
+<div class="container">
+
+  <!-- BOAS-VINDAS -->
+  <div class="card">
+    <h1>📚 Bem-vindo ao Sebo Sistema</h1>
+    <p>Gerencie seu acervo, vendas e clientes de forma simples e profissional.</p>
+  </div>
+
+  <!-- CARDS -->
+  <div class="grid">
+
+    <div class="card">
+      <h3>📖 Acervo</h3>
+      <p>Visualize todos os livros cadastrados.</p>
+      <a href="acervo.html"><button>Acessar</button></a>
+    </div>
+
+    <div class="card">
+      <h3>➕ Cadastrar Livro</h3>
+      <p>Adicione novos livros ao sistema.</p>
+      <a href="cadastro-livros.html"><button>Cadastrar</button></a>
+    </div>
+
+    <div class="card">
+      <h3>💰 Vendas</h3>
+      <p>Registre e acompanhe vendas.</p>
+      <a href="vendas.html"><button>Registrar</button></a>
+    </div>
+
+    <div class="card">
+      <h3>📊 Dashboard</h3>
+      <p>Veja relatórios e desempenho.</p>
+      <a href="dashboard.html"><button>Ver</button></a>
+    </div>
+
+    <div class="card">
+      <h3>👤 Clientes</h3>
+      <p>Gerencie seus clientes.</p>
+      <a href="clientes.html"><button>Acessar</button></a>
+    </div>
+
+    <div class="card">
+      <h3>👨‍💼 Funcionários</h3>
+      <p>Controle da equipe.</p>
+      <a href="funcionarios.html"><button>Acessar</button></a>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- FOOTER COM ASSINATURA -->
+<footer>
+  <p>© 2026 Sebo Sistema</p>
+  <p class="assinatura">🚀 Desenvolvido por LucasByteX</p>
+</footer>
+
+<!-- PROTEÇÃO LOGIN -->
+<script src="js/auth.js"></script>
+
+<!-- LOGOUT -->
+<script>
+function logout(){
+  localStorage.removeItem("logado");
+}
+</script>
+
+</body>
+</html>

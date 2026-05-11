@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Vendas - Sebo Sistema</title>
+  <link rel="stylesheet" href="../css/style.css/estillo.css">
+</head>
+
+<body>
+
+<!-- MENU PADRÃO -->
+<header class="topo">
+  <h2>Sebo Sistema</h2>
+
+  <div class="menu">
+    <a href="principal.html">Home</a>
+    <a href="acervo.html">Acervo</a>
+    <a href="cadastro-livros.html">Cadastrar Livro</a>
+    <a href="vendas.html">Vendas</a>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="clientes.html">Clientes</a>
+    <a href="funcionarios.html">Funcionários</a>
+    <a href="login.html" onclick="logout()">Sair</a>
+  </div>
+</header>
+
+<!-- CONTEÚDO -->
+<div class="container">
+
+  <div class="card">
+    <h2>💰 Registrar Venda</h2>
+
+    <input id="livro" placeholder="Livro"><br><br>
+    <input id="cliente" placeholder="Cliente"><br><br>
+    <input id="valor" placeholder="Valor"><br><br>
+
+    <button onclick="registrarVenda()">Registrar</button>
+
+    <p id="msg"></p>
+  </div>
+
+  <!-- LISTA DE VENDAS -->
+  <div class="card">
+    <h3>📊 Histórico de Vendas</h3>
+    <ul id="lista-vendas"></ul>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Sebo Sistema</p>
+</footer>
+
+<!-- PROTEÇÃO LOGIN -->
+<script src="js/auth.js"></script>
+
+<!-- SCRIPT -->
+<script>
+
+// LOGOUT
+function logout(){
+  localStorage.removeItem("logado");
+}
+
+// REGISTRAR VENDA
+function registrarVenda(){
+  let livro = document.getElementById("livro").value;
+  let cliente = document.getElementById("cliente").value;
+  let valor = document.getElementById("valor").value;
+
+  if(!livro || !cliente || !valor){
+    msg.innerText = "Preencha todos os campos!";
+    msg.style.color = "red";
+    return;
+  }
+
+  let vendas = JSON.parse(localStorage.getItem("vendas")) || [];
+
+  vendas.push({livro, cliente, valor});
+
+  localStorage.setItem("vendas", JSON.stringify(vendas));
+
+  msg.innerText = "Venda registrada!";
+  msg.style.color = "green";
+
+  document.getElementById("livro").value = "";
+  document.getElementById("cliente").value = "";
+  document.getElementById("valor").value = "";
+
+  carregarVendas();
+}
+
+// CARREGAR VENDAS
+function carregarVendas(){
+  let vendas = JSON.parse(localStorage.getItem("vendas")) || [];
+  let lista = document.getElementById("lista-vendas");
+
+  lista.innerHTML = "";
+
+  vendas.forEach(v => {
+    let item = `<li>${v.livro} - ${v.cliente} - R$ ${v.valor}</li>`;
+    lista.innerHTML += item;
+  });
+}
+
+carregarVendas();
+
+</script>
+
+</body>
+</html>

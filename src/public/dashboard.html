@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard - Sebo Sistema</title>
+  <link rel="stylesheet" href="../css/style.css/estillo.css">
+</head>
+
+<body>
+
+<!-- MENU PADRÃO -->
+<header class="topo">
+  <h2>Sebo Sistema</h2>
+
+  <div class="menu">
+    <a href="principal.html">Home</a>
+    <a href="acervo.html">Acervo</a>
+    <a href="cadastro-livros.html">Cadastrar Livro</a>
+    <a href="vendas.html">Vendas</a>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="clientes.html">Clientes</a>
+    <a href="funcionarios.html">Funcionários</a>
+    <a href="login.html" onclick="logout()">Sair</a>
+  </div>
+</header>
+
+<!-- CONTEÚDO -->
+<div class="container">
+
+  <!-- RESUMO -->
+  <div class="card">
+    <h2>📊 Dashboard</h2>
+    <p>Relatórios e histórico de vendas.</p>
+  </div>
+
+  <!-- CARDS DE RESUMO -->
+  <div class="grid">
+
+    <div class="card">
+      <h3>Total de Vendas</h3>
+      <p id="total-vendas">0</p>
+    </div>
+
+    <div class="card">
+      <h3>Faturamento Total</h3>
+      <p id="faturamento">R$ 0</p>
+    </div>
+
+  </div>
+
+  <!-- HISTÓRICO -->
+  <div class="card">
+    <h3>📋 Histórico de Vendas</h3>
+    <ul id="lista-vendas"></ul>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Sebo Sistema</p>
+</footer>
+
+<!-- PROTEÇÃO LOGIN -->
+<script src="js/auth.js"></script>
+
+<!-- SCRIPT -->
+<script>
+
+// LOGOUT
+function logout(){
+  localStorage.removeItem("logado");
+}
+
+// CARREGAR DADOS
+function carregarDashboard(){
+
+  let vendas = JSON.parse(localStorage.getItem("vendas")) || [];
+
+  let total = vendas.length;
+  let soma = 0;
+
+  let lista = document.getElementById("lista-vendas");
+  lista.innerHTML = "";
+
+  vendas.forEach(v => {
+    soma += parseFloat(v.valor);
+
+    lista.innerHTML += `<li>${v.livro} - ${v.cliente} - R$ ${v.valor}</li>`;
+  });
+
+  document.getElementById("total-vendas").innerText = total;
+  document.getElementById("faturamento").innerText = "R$ " + soma.toFixed(2);
+}
+
+carregarDashboard();
+
+</script>
+
+</body>
+</html>
