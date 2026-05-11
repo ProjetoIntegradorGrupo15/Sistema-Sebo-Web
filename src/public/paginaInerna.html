@@ -6,35 +6,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <title>Livraria-pagina-interna</title>
+    <title>Acervo-Sebo-pagina-interna</title>
 </head>
-<body>
-    <script src="src/javascript/script.js"></script>
-    <div class="box-menu">
-        <input type="checkbox"id="check" checked>
-        <div class="menu-icon">
+<body class="pagina-interna">
+   <!-- Adicione isso onde quiser mostrar o nome -->
+<div class="usuario-bem-vindo">
+    Bem-vindo, <span id="bem-vindo"></span>!
+</div>
+   
+    <div class="box">
+        <div class="box-menu">
+         <input type="checkbox"id="check" checked>
+         <div class="menu-icon">
             <label for="check">
                 <i class="fas fa-bars"></i>
             </label>
-        </div>
-        <div class="sidebar-menu">
+         </div>
+         <div class="sidebar-menu">
             <div class="sidebar-titulo">
-                 <a href="../index.html" class="logo-link">
+                 <a href="C:\Users\aline\OneDrive\Desktop\Projeto teste\index.html" class="logo-link">
             <img
-            src="../logo.png" 
+            src="imagens/logo.png" 
             alt="logo" class="logo-img">
-        </a>   
-        </div>
-        <div class="btn-open">
+         </a>   
+         </div>
+            <div class="btn-open">
             <label for="check">
                 <i class="fas fa-times"></i>
             </label>
-        </div>
-        <nav class="menu">
+            </div>
+         <nav class="menu">
             <ul>
                 <li>
                     <i class="fas fa-home"></i>
-                    <a href="../index.html">Página Inicial</a>
+                    <a href="index.html">Página Inicial</a>
                 </li>
                  <li>
                     <i class="fas fa-search"></i>
@@ -45,12 +50,14 @@
                     <a href="#">Cadastrar Acervo</a>
                 </li>
                  <li>
-                    <i class="fas fa-sign-out"></i>
+                    <i class="fas fa-sign-out-alt"></i>
                     <a href="#">Sair</a>
                 </li>
             </ul>
-
+         
         </nav>
     </div>
+</div>
+ <script src="paginaInterna.js"></script>
 </body>
 </html>

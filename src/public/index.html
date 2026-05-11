@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        
+
+    <title>Acervo Sebos</title>
+</head>
+
+<body>
+    <div class= "paginaInicial">
+    <!-- MENU -->
+    <nav>
+        <div class="logo">
+            <a href="index.html" class="logo-link">
+                <img src="imagens/logo.png" alt="Logo" class="logo-img">
+            </a>
+        </div>
+
+        <ul>
+            <li>
+                <a href="Cadastre-se.html" class="active">
+                    Cadastre-se
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <div class="bg-image">
+
+        <!-- TEXTO DE BOAS-VINDAS -->
+        <div class="Welcome">
+            <h1>Bem-vindo ao Acervo Sebos!</h1>
+
+            <p>
+                Aqui você cadastra seu acervo, pesquisa e atualiza seus itens!
+            </p>
+
+            <p>
+                Organize sua loja de um novo jeito,
+            </p>
+
+            <p>
+                e faça parte da plataforma que deixa seus itens contarem sua história!
+            </p>
+        </div>
+
+        <!-- ÁREA DE LOGIN -->
+        <div class="enter-box-enter">
+            <div class="container">
+
+                <section class="header">
+                    <h2>LOGIN</h2>
+                </section>
+
+                <form id="form" class="form">
+
+                    <!-- LOGIN -->
+                    <div class="form-content">
+                        <label for="login">login:</label>
+
+                        <input
+                            type="email"
+                            id="login"
+                            placeholder="Digite seu e-mail"
+                        >
+
+                        <a>Campo obrigatório</a>
+                    </div>
+
+                    <!-- SENHA -->
+                    <div class="form-content">
+                        <label for="senha">Senha:</label>
+
+                        <input
+                            type="password"
+                            id="senha"
+                            placeholder="Digite sua senha"
+                        >
+
+                        <a>Digite sua senha</a>
+                    </div>
+
+                    <!-- LINKS -->
+                    <div class="nav-login">
+                        <a href="Cadastre-se.html">
+                            Nova Conta
+                        </a>
+
+                        <a href="recuperar-senha.html">
+                            Recuperar Senha
+                        </a>
+                    </div>
+
+                    <!-- BOTÃO -->
+                    <div>
+                        <button type="submit">
+                            Entrar
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- RODAPÉ -->
+    <footer>
+        Acervo Sebos &copy; 2026
+    </footer>
+
+    <!-- JS -->
+    <script src="login.js"></script>
+
+</body>
+
+</html>
