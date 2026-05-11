@@ -86,3 +86,4 @@ Este projeto é apenas para fins acadêmicos.
 ##💡 Melhorias Futuras
 - Implementar autenticação de usuários
 - Deixar todas as páginas funcionais
+- Hospedar o site no Render ou outro site de hospedagem
