@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Sebo Sistema</title>
+  <title>Acervo Sebos</title>
 
   <!-- ⚠️ CORREÇÃO DO CAMINHO DO CSS -->
   <link rel="stylesheet" href="estillo.css">
@@ -12,19 +12,28 @@
 
 <!-- MENU TOPO -->
 <header class="topo">
-  <h2>Sebo Sistema</h2>
+  <nav>
 
-  <div class="menu">
-    <a href="principal.html">Home</a>
-    <a href="acervo.html">Acervo</a>
-    <a href="cadastro-livros.html">Cadastrar Livro</a>
-    <a href="vendas.html">Vendas</a>
-    <a href="dashboard.html">Dashboard</a>
-    <a href="clientes.html">Clientes</a>
-    <a href="funcionarios.html">Funcionários</a>
-    <a href="login.html" onclick="logout()">Sair</a>
-  </div>
+    <div class="logo">
+      <a href="index.html" class="logo-link">
+        <img src="imagens/logo.png" alt="logo" class="logo-img">
+      </a>
+    </div>
+
+    <div class="menu">
+      <a href="principal.html">Home</a>
+      <a href="acervo.html">Acervo</a>
+      <a href="cadastro-acervo.html">Cadastrar Acervo</a>
+      <a href="vendas.html">Vendas</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="clientes.html">Clientes</a>
+      <a href="funcionarios.html">Funcionários</a>
+      <a href="index.html" onclick="logout()">Sair</a>
+    </div>
+
+  </nav>
 </header>
+
 
 <!-- CONTEÚDO -->
 <div class="container">
@@ -45,9 +54,9 @@
     </div>
 
     <div class="card">
-      <h3>➕ Cadastrar Livro</h3>
+      <h3>➕ Cadastrar Acervo</h3>
       <p>Adicione novos livros ao sistema.</p>
-      <a href="cadastro-livros.html"><button>Cadastrar</button></a>
+      <a href="cadastro-acervo.html"><button>Cadastrar</button></a>
     </div>
 
     <div class="card">

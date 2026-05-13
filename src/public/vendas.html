@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Vendas - Sebo Sistema</title>
+  <title>Vendas - Acervo Sebos</title>
   <link rel="stylesheet" href="estillo.css">
 </head>
 
@@ -10,31 +10,49 @@
 
 <!-- MENU PADRÃO -->
 <header class="topo">
-  <h2>Sebo Sistema</h2>
+  <nav>
 
-  <div class="menu">
-    <a href="principal.html">Home</a>
-    <a href="acervo.html">Acervo</a>
-    <a href="cadastro-livros.html">Cadastrar Livro</a>
-    <a href="vendas.html">Vendas</a>
-    <a href="dashboard.html">Dashboard</a>
-    <a href="clientes.html">Clientes</a>
-    <a href="funcionarios.html">Funcionários</a>
-    <a href="login.html" onclick="logout()">Sair</a>
-  </div>
+    <div class="logo">
+      <a href="index.html" class="logo-link">
+        <img src="imagens/logo.png" alt="logo" class="logo-img">
+      </a>
+    </div>
+
+    <div class="menu">
+      <a href="principal.html">Home</a>
+      <a href="acervo.html">Acervo</a>
+      <a href="cadastro-acervo.html">Cadastrar Acervo</a>
+      <a href="vendas.html">Vendas</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="clientes.html">Clientes</a>
+      <a href="funcionarios.html">Funcionários</a>
+      <a href="index.html" onclick="logout()">Sair</a>
+    </div>
+
+  </nav>
 </header>
 
 <!-- CONTEÚDO -->
 <div class="container">
 
   <div class="card">
-    <h2>💰 Registrar Venda</h2>
-
-    <input id="livro" placeholder="Livro"><br><br>
-    <input id="cliente" placeholder="Cliente"><br><br>
-    <input id="valor" placeholder="Valor"><br><br>
-
-    <button onclick="registrarVenda()">Registrar</button>
+    <form id="form" class="form">
+     
+  <h2 class="form-title">💰 Registrar Venda</h2>
+    <div class="form-content">
+      <label for="livro">Livro:</label>           
+      <input id="nome" placeholder="">
+    </div>      
+    <div class="form-content">
+      <label for="cliente">Cliente:</label>          
+      <input id="nome" placeholder="">
+      </div>
+    <div class="form-content">
+      <label for="nome">Valor:</label>           
+        <input id="nome" placeholder="">
+    </div>
+    
+   <button onclick="registrarVenda()">Registrar</button>
 
     <p id="msg"></p>
   </div>
@@ -49,7 +67,7 @@
 
 <!-- FOOTER -->
 <footer>
-  <p>© 2026 Sebo Sistema</p>
+  <p>© 2026 Acervo Sebos</p>
 </footer>
 
 <!-- PROTEÇÃO LOGIN -->

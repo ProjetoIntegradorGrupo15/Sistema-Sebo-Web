@@ -21,7 +21,7 @@ document.getElementById("form").addEventListener("submit", async (e) => {
             alert("Login realizado com sucesso!");
              // Salva usuário no localStorage (opcional)
             localStorage.setItem("usuario", JSON.stringify(data.usuario));
-           window.location.href = "paginaInerna.html";
+           window.location.href = "principal.html";
            console.log("Redirecionando")
         } else {
             alert(data.erro || "Login inválido");

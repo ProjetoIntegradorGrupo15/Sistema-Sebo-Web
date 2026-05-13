@@ -1,16 +1,26 @@
 import sqlite3 from 'sqlite3';
-import dotenv from 'dotenv';
-dotenv.config();
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-const db = new sqlite3.Database('./database.db', (err) => {
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
+// FORÇA RAIZ DO PROJETO (não depende de src/config)
+const dbPath = path.resolve(process.cwd(), 'database.db');
+
+console.log("🔥 BANCO USADO REALMENTE EM:", dbPath);
+
+const db = new sqlite3.Database(dbPath, (err) => {
     if (err) {
-        console.error('Erro ao conectar ao SQLite:', err.message);
+        console.error('Erro SQLite:', err.message);
     } else {
-        console.log('Conectado ao SQLite com sucesso');
+        console.log('✔ Banco conectado');
     }
 });
-/* TABELA LIVROS */
+
+
+
+
 db.run(`
     CREATE TABLE IF NOT EXISTS livros (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -19,13 +29,30 @@ db.run(`
         edicao TEXT,
         editora TEXT,
         ano INTEGER,
+        isbn TEXT,
+           categoria TEXT NOT NULL CHECK (
+            categoria IN (
+                'Aventura',
+                'Biografia',
+                'Didático',
+                'Fantasia',
+                'Ficção',
+                'Romance',
+                'Suspense',
+                'Terror',
+                'Outros'
+            )
+        ),
+
         preco REAL NOT NULL,
-        disponivel TEXT NOT NULL CHECK (disponivel IN ('Sim', 'Nao'))
+
+        disponivel INTEGER NOT NULL CHECK(disponivel IN ('Sim', 'Não'))
     )
 `, (err) => {
+
     if (err) {
         console.error('Erro criar tabela de livros', err.message);
-        } else {
+    } else {
         console.log('Tabela livros criada com sucesso!');
     }
 });

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Clientes - Acervo Sebos</title>
+  <link rel="stylesheet" href="estillo.css">
+</head>
+
+<body>
+
+<!-- MENU PADRÃO -->
+<header class="topo">
+  <nav>
+
+    <div class="logo">
+      <a href="index.html" class="logo-link">
+        <img src="imagens/logo.png" alt="logo" class="logo-img">
+      </a>
+    </div>
+
+    <div class="menu">
+      <a href="principal.html">Home</a>
+      <a href="acervo.html">Acervo</a>
+      <a href="cadastro-acervo.html">Cadastrar Acervo</a>
+      <a href="vendas.html">Vendas</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="clientes.html">Clientes</a>
+      <a href="funcionarios.html">Funcionários</a>
+      <a href="index.html" onclick="logout()">Sair</a>
+    </div>
+
+  </nav>
+</header>
+
+
+ <!-- CADASTRO-ACERVO -->
+  
+<div class="form-container">
+  <h2 class="form-title">Cadastro de Acervo</h2>
+
+  <form id="cadastroForm">
+
+    <!-- Linha 1 -->
+    <div class="form-row">
+      <div class="field w-small">
+        <label for="id">Id:</label>
+        <input type="text" id="id" name="id" disabled readonly>
+      </div>
+
+      <div class="field flex-fill">
+        <label for="titulo">Título:</label>
+        <input type="text" id="titulo" name="titulo">
+      </div>
+    </div>
+
+    <!-- Linha 2 -->
+    <div class="form-row">
+      <div class="field w-large">
+        <label for="autor">Autor:</label>
+        <input type="text" id="autor" name="autor">
+      </div>
+
+      <div class="field w-small">
+        <label for="edicao">Edição:</label>
+        <input type="text" id="edicao" name="edicao">
+      </div>
+    </div>
+
+       <!-- Linha 3 (Editora, Ano, ISBN) -->
+    <div class="form-row">
+      <div class="field flex-fill">
+        <label for="editora">Editora:</label>
+        <input type="text" id="editora" name="editora">
+      </div>
+
+      <div class="field w-small">
+        <label for="ano">Ano:</label>
+        <input type="text" id="ano" name="ano">
+      </div>
+
+      <div class="field flex-fill">
+        <label for="isbn">ISBN:</label>
+        <input type="text" id="isbn" name="isbn">
+      </div>
+    </div>
+
+    <!-- Linha 4 (Categoria + Disponível) -->
+    <div class="form-row">
+
+      <!-- Categoria -->
+      <div class="field flex-fill">
+        <label for="categoria">Categoria:</label>
+
+        <select id="categoria" name="categoria">
+          <option value="">Selecione</option>
+          <option value="aventura">Aventura</option>
+          <option value="biografia">Biografia</option>
+          <option value="didatico">Didático</option>
+          <option value="fantasia">Fantasia</option>
+          <option value="ficcao">Ficção</option>
+          <option value="romance">Romance</option>
+          <option value="suspense">Suspense</option>
+          <option value="terror">Terror</option>
+          <option value="outros">Outros</option>
+        </select>
+      </div>
+
+      <!-- Disponível -->
+      <div class="field">
+        <label>Disponível:</label>
+
+        <div class="radio-group">
+          <label class="radio-item">
+            <input type="radio" name="disponivel" value="sim">
+            Sim
+          </label>
+
+          <label class="radio-item">
+            <input type="radio" name="disponivel" value="nao">
+            Não
+          </label>
+        </div>
+      </div>
+
+    </div>
+
+
+    <!-- Linha 5 -->
+    <div class="form-row">
+      <div class="field w-medium">
+        <label for="preco">Valor:</label>
+
+        <input
+          type="text"
+          id="preco"
+          name="preco"
+          placeholder="R$ 0,00"
+        >
+      </div>
+    </div>
+
+    <!-- Linha 6 -->
+    <div class="button-row">
+      <button
+        type="button"
+        id="btnCancelar"
+        class="btn-cancel"
+      >
+        Cancelar
+      </button>
+
+      <button
+        type="submit"
+        id="btnCadastrar"
+        class="btn-submit"
+      >
+        Cadastrar
+      </button>
+    </div>
+
+  </form>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Acervo Sebos</p>
+</footer>
+
+
+<!-- SCRIPT -->
+<script src="cadastro-acervo.js"></script>
+
+<!-- PROTEÇÃO LOGIN -->
+<script src="js/auth.js"></script>
+
+<!-- SCRIPT -->
+<script>
+
+// LOGOUT
+function logout(){
+  localStorage.removeItem("logado");
+}
+
+// REGISTRAR VENDA
+function registrarVenda(){
+  let livro = document.getElementById("livro").value;
+  let cliente = document.getElementById("cliente").value;
+  let valor = document.getElementById("valor").value;
+
+  if(!livro || !cliente || !valor){
+    msg.innerText = "Preencha todos os campos!";
+    msg.style.color = "red";
+    return;
+  }
+
+  let vendas = JSON.parse(localStorage.getItem("vendas")) || [];
+
+  vendas.push({livro, cliente, valor});
+
+  localStorage.setItem("vendas", JSON.stringify(vendas));
+
+  msg.innerText = "Venda registrada!";
+  msg.style.color = "green";
+
+  document.getElementById("livro").value = "";
+  document.getElementById("cliente").value = "";
+  document.getElementById("valor").value = "";
+
+  carregarVendas();
+}
+
+// CARREGAR VENDAS
+function carregarVendas(){
+  let vendas = JSON.parse(localStorage.getItem("vendas")) || [];
+  let lista = document.getElementById("lista-vendas");
+
+  lista.innerHTML = "";
+
+  vendas.forEach(v => {
+    let item = `<li>${v.livro} - ${v.cliente} - R$ ${v.valor}</li>`;
+    lista.innerHTML += item;
+  });
+}
+
+carregarVendas();
+
+</script>
+
+</body>
+</html>
