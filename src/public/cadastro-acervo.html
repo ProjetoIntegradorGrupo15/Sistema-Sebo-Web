@@ -93,15 +93,15 @@
 
         <select id="categoria" name="categoria">
           <option value="">Selecione</option>
-          <option value="aventura">Aventura</option>
-          <option value="biografia">Biografia</option>
-          <option value="didatico">Didático</option>
-          <option value="fantasia">Fantasia</option>
-          <option value="ficcao">Ficção</option>
-          <option value="romance">Romance</option>
-          <option value="suspense">Suspense</option>
-          <option value="terror">Terror</option>
-          <option value="outros">Outros</option>
+          <option value="Aventura">Aventura</option>
+          <option value="Biografia">Biografia</option>
+          <option value="Didático">Didático</option>
+          <option value="Fantasia">Fantasia</option>
+          <option value="Ficção">Ficção</option>
+          <option value="Romance">Romance</option>
+          <option value="Suspense">Suspense</option>
+          <option value="Terror">Terror</option>
+          <option value="Outros">Outros</option>
         </select>
       </div>
 
@@ -111,12 +111,12 @@
 
         <div class="radio-group">
           <label class="radio-item">
-            <input type="radio" name="disponivel" value="sim">
+            <input type="radio" name="disponivel" value="Sim">
             Sim
           </label>
 
           <label class="radio-item">
-            <input type="radio" name="disponivel" value="nao">
+            <input type="radio" name="disponivel" value="Não">
             Não
           </label>
         </div>
@@ -160,6 +160,8 @@
 
   </form>
 </div>
+<script src="cadastro-acervo.js"></script>
+</body>
 
 <!-- FOOTER -->
 <footer>
@@ -167,64 +169,4 @@
 </footer>
 
 
-<!-- SCRIPT -->
-<script src="cadastro-acervo.js"></script>
 
-<!-- PROTEÇÃO LOGIN -->
-<script src="js/auth.js"></script>
-
-<!-- SCRIPT -->
-<script>
-
-// LOGOUT
-function logout(){
-  localStorage.removeItem("logado");
-}
-
-// REGISTRAR VENDA
-function registrarVenda(){
-  let livro = document.getElementById("livro").value;
-  let cliente = document.getElementById("cliente").value;
-  let valor = document.getElementById("valor").value;
-
-  if(!livro || !cliente || !valor){
-    msg.innerText = "Preencha todos os campos!";
-    msg.style.color = "red";
-    return;
-  }
-
-  let vendas = JSON.parse(localStorage.getItem("vendas")) || [];
-
-  vendas.push({livro, cliente, valor});
-
-  localStorage.setItem("vendas", JSON.stringify(vendas));
-
-  msg.innerText = "Venda registrada!";
-  msg.style.color = "green";
-
-  document.getElementById("livro").value = "";
-  document.getElementById("cliente").value = "";
-  document.getElementById("valor").value = "";
-
-  carregarVendas();
-}
-
-// CARREGAR VENDAS
-function carregarVendas(){
-  let vendas = JSON.parse(localStorage.getItem("vendas")) || [];
-  let lista = document.getElementById("lista-vendas");
-
-  lista.innerHTML = "";
-
-  vendas.forEach(v => {
-    let item = `<li>${v.livro} - ${v.cliente} - R$ ${v.valor}</li>`;
-    lista.innerHTML += item;
-  });
-}
-
-carregarVendas();
-
-</script>
-
-</body>
-</html>

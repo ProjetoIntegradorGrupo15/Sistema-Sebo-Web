@@ -4,7 +4,8 @@ import db from '../config/db.js';
    INSERIR LIVRO
 ========================= */
 export const inserirLivro = (req, res) => {
- console.log(req.body);
+    console.log("BODY:", req.body);
+
     const {
         titulo,
         autor,
@@ -33,6 +34,17 @@ export const inserirLivro = (req, res) => {
         });
     }
 
+    /* 
+       Se vier true/1/sim → salva "sim"
+       Caso contrário → salva "não"
+    */
+    const disponibilidade = (
+        disponivel === true ||
+        disponivel === 1 ||
+        disponivel === "1" ||
+        String(disponivel).toLowerCase() === "sim"
+    ) ? "Sim" : "Não";
+
     const sql = `
         INSERT INTO livros (
             titulo,
@@ -58,18 +70,20 @@ export const inserirLivro = (req, res) => {
             ano,
             isbn,
             preco,
-            disponivel,
+            disponibilidade,
             categoria
         ],
+        
         function (erro) {
-
             if (erro) {
-                console.error(erro);
+                console.error("Erro SQL:", erro);
 
                 return res.status(500).json({
                     mensagem: 'Erro ao cadastrar livro'
                 });
             }
+
+            console.log("Cadastro salvo! ID:", this.lastID);
 
             res.status(201).json({
                 mensagem: 'Livro cadastrado com sucesso',
@@ -141,7 +155,6 @@ export const buscarLivroPorId = (req, res) => {
    ATUALIZAR LIVRO
 ========================= */
 export const atualizarLivro = (req, res) => {
-
     const { id } = req.params;
 
     const {
@@ -156,7 +169,6 @@ export const atualizarLivro = (req, res) => {
         categoria
     } = req.body;
 
-    /* VALIDAÇÃO */
     if (
         !titulo ||
         !autor ||
@@ -171,6 +183,13 @@ export const atualizarLivro = (req, res) => {
             mensagem: 'Preencha todos os campos obrigatórios'
         });
     }
+
+    const disponibilidade = (
+        disponivel === true ||
+        disponivel === 1 ||
+        disponivel === "1" ||
+        String(disponivel).toLowerCase() === "sim"
+    ) ? "sim" : "não";
 
     const sql = `
         UPDATE livros
@@ -197,12 +216,11 @@ export const atualizarLivro = (req, res) => {
             ano,
             isbn,
             preco,
-            disponivel ? 1 : 0,
+            disponibilidade,
             categoria,
             id
         ],
         function (erro) {
-
             if (erro) {
                 console.error(erro);
 
@@ -223,7 +241,6 @@ export const atualizarLivro = (req, res) => {
         }
     );
 };
-
 /* =========================
    EXCLUIR LIVRO
 ========================= */

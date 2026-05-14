@@ -5,7 +5,7 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// FORÇA RAIZ DO PROJETO (não depende de src/config)
+
 const dbPath = path.resolve(process.cwd(), 'database.db');
 
 console.log("🔥 BANCO USADO REALMENTE EM:", dbPath);
@@ -17,10 +17,6 @@ const db = new sqlite3.Database(dbPath, (err) => {
         console.log('✔ Banco conectado');
     }
 });
-
-
-
-
 db.run(`
     CREATE TABLE IF NOT EXISTS livros (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -46,7 +42,7 @@ db.run(`
 
         preco REAL NOT NULL,
 
-        disponivel INTEGER NOT NULL CHECK(disponivel IN ('Sim', 'Não'))
+        disponivel TEXT NOT NULL CHECK(disponivel IN ('Sim', 'Não'))
     )
 `, (err) => {
 

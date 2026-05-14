@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const form = document.getElementById("form-acervo");
+  const form = document.getElementById("cadastroForm");
   const btnCadastrar = document.getElementById("btnCadastrar");
 
   // Campos
@@ -8,150 +8,93 @@ document.addEventListener("DOMContentLoaded", () => {
   const autor = document.getElementById("autor");
   const editora = document.getElementById("editora");
   const ano = document.getElementById("ano");
-  const isbn = document.getElementById("isbn"); // opcional
+  const isbn = document.getElementById("isbn");
+  const edicao = document.getElementById("edicao");
+  const preco = document.getElementById("preco");
+  const categoria = document.getElementById("categoria");
 
-  const radiosDisponivel = document.querySelectorAll(
-    'input[name="disponivel"]'
-  );
-
-  /* =========================
-     ID DESABILITADO
-  ========================= */
-  campoId.value = "";
+  // Garante que o campo ID comece desabilitado na interface
   campoId.disabled = true;
-  campoId.style.backgroundColor = "#f1f1f1";
-  campoId.style.cursor = "not-allowed";
-  campoId.style.opacity = "0.8";
 
-  /* =========================
-     CAMPOS OBRIGATÓRIOS (*)
-  ========================= */
-  const obrigatorios = [
-    titulo,
-    autor,
-    editora,
-    ano
-  ];
-
-  obrigatorios.forEach((campo) => {
-    const label = document.querySelector(`label[for="${campo.id}"]`);
-
-    if (label && !label.innerHTML.includes("*")) {
-      label.innerHTML += ' <span style="color:red;">*</span>';
-    }
-  });
-
-  /* =========================
-     SOMENTE LETRAS MAIÚSCULAS
-  ========================= */
-
-  const camposMaiusculos = [
-    titulo,
-    autor,
-    editora
-  ];
-
-  camposMaiusculos.forEach((campo) => {
-    campo.addEventListener("input", () => {
-      campo.value = campo.value.toUpperCase();
-      validarFormulario();
-    });
-  });
-
-  /* =========================
-     BOTÃO COMEÇA DESABILITADO
-  ========================= */
-  btnCadastrar.disabled = true;
-  btnCadastrar.style.opacity = "0.6";
-  btnCadastrar.style.cursor = "not-allowed";
-
-  /* =========================
-     VALIDAR FORMULÁRIO
-  ========================= */
-  function validarFormulario() {
-    const camposPreenchidos = obrigatorios.every((campo) => {
-      return campo.value.trim() !== "";
-    });
-
-    const radioSelecionado = document.querySelector(
-      'input[name="disponivel"]:checked'
-    );
-
-    const tickPreenchido = radioSelecionado !== null;
-
-    if (camposPreenchidos && tickPreenchido) {
-      btnCadastrar.disabled = false;
-      btnCadastrar.style.opacity = "1";
-      btnCadastrar.style.cursor = "pointer";
-    } else {
-      btnCadastrar.disabled = true;
-      btnCadastrar.style.opacity = "0.6";
-      btnCadastrar.style.cursor = "not-allowed";
-    }
-  }
-
-  /* =========================
-     EVENTOS
-  ========================= */
-  obrigatorios.forEach((campo) => {
-    campo.addEventListener("input", validarFormulario);
-    campo.addEventListener("blur", validarFormulario);
-  });
-
-  radiosDisponivel.forEach((radio) => {
-    radio.addEventListener("change", validarFormulario);
-  });
-
-  /* =========================
-     SUBMIT
-  ========================= */
- form.addEventListener("submit", async (e) => {
-  e.preventDefault();
-
-  const radioSelecionado = document.querySelector(
-    'input[name="disponivel"]:checked'
-  );
-
-  if (!radioSelecionado) {
-    alert("Selecione Sim ou Não.");
-    return;
-  }
-
-  const dadosFormulario = {
-    titulo: titulo.value.trim(),
-    autor: autor.value.trim(),
-    editora: editora.value.trim(),
-    ano: ano.value.trim(),
-    isbn: isbn.value.trim(),
-    disponivel: radioSelecionado.value,
-    categoria: document.getElementById("categoria").value, // IMPORTANTE
-    edicao: document.getElementById("edicao").value,
-    preco: document.getElementById("preco").value
+  // Função para forçar letras maiúsculas nos campos de texto
+  const forcarMaiusculas = (evento) => {
+    evento.target.value = evento.target.value.toUpperCase();
   };
 
-  try {
-    const resposta = await fetch("http://localhost:3000/livros", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(dadosFormulario)
-    });
+  [titulo, autor, editora].forEach(campo => {
+    campo.addEventListener("input", forcarMaiusculas);
+  });
 
-    const resultado = await resposta.json();
+  // Função para validar o formulário e liberar o botão cadastrar
+  const validarFormulario = () => {
+    const radioSelecionado = document.querySelector('input[name="disponivel"]:checked');
+    
+    // Verifica se todos os campos obrigatórios possuem conteúdo válido
+    const obrigatoriosPreenchidos = 
+      titulo.value.trim() !== "" &&
+      autor.value.trim() !== "" &&
+      edicao.value.trim() !== "" &&
+      editora.value.trim() !== "" &&
+      ano.value.trim() !== "" &&
+      isbn.value.trim() !== "" &&
+      preco.value.trim() !== "" &&
+      categoria.value.trim() !== "" &&
+      radioSelecionado !== null;
 
-    if (!resposta.ok) {
-      alert(resultado.mensagem || "Erro ao cadastrar");
-      return;
+    // Habilita ou desabilita o botão baseado na validação
+    btnCadastrar.disabled = !obrigatoriosPreenchidos;
+  };
+
+  // Escuta mudanças em qualquer campo para revalidar o botão
+  form.addEventListener("input", validarFormulario);
+
+  // Executa uma vez no início para garantir o botão desativado de fábrica
+  validarFormulario();
+
+  // Envio do formulário
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const radioSelecionado = document.querySelector('input[name="disponivel"]:checked');
+
+    const dadosLivro = {
+      titulo: titulo.value.trim(),
+      autor: autor.value.trim(),
+      edicao: edicao.value.trim(),
+      editora: editora.value.trim(),
+      ano: parseInt(ano.value, 10),
+      isbn: isbn.value.trim() || null,
+      preco: preco.value.trim(),
+      categoria: categoria.value,
+      disponivel: radioSelecionado ? radioSelecionado.value : "NÃO"
+    };
+
+    try {
+      const resposta = await fetch("http://localhost:3000/livros", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(dadosLivro)
+      });
+
+      const resultado = await resposta.json();
+
+      if (resposta.ok) {
+        alert("Livro cadastrado com sucesso!");
+        
+        // Exibe temporariamente o ID gerado pelo SQLite no campo desabilitado
+        campoId.value = resultado.id;
+        
+        // Reseta o restante do formulário após 3 segundos e bloqueia o botão novamente
+        setTimeout(() => {
+          form.reset();
+          validarFormulario();
+        }, 3000);
+
+      } else {
+        alert("Erro no cadastro: " + resultado.error);
+      }
+    } catch (erro) {
+      console.error("Erro na comunicação:", erro);
     }
-
-    alert("Livro cadastrado com sucesso!");
-
-    form.reset();
-    validarFormulario();
-
-  } catch (erro) {
-    console.error(erro);
-    alert("Erro de conexão com o servidor");
-  }
+  });
 });
