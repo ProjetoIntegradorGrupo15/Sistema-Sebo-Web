@@ -3,7 +3,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const searchInput = document.getElementById("search");
     const formBusca = document.getElementById("form");
     const msgNenhumResultado = document.getElementById("nenhum-resultado");
-    const API_URL = "http://localhost:3000/livros";    
+    const API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+    ? 'http://localhost:3000/livros'
+    : '/livros';
    
     let livrosOriginais = [];
    

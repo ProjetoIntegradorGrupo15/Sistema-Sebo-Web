@@ -5,8 +5,14 @@ document.getElementById("form").addEventListener("submit", async (e) => {
     const login = document.getElementById("login").value;
     const senha = document.getElementById("senha").value;
 
+    // DEFINIÇÃO INTELIGENTE DA URL DE LOGIN (Local vs Nuvem)
+    const urlLogin = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+        ? 'http://localhost:3000/usuarios/login'
+        : '/usuarios/login';
+
      try {
-        const response = await fetch("http://localhost:3000/usuarios/login", {
+        // Substituído o endereço fixo pela variável urlLogin
+        const response = await fetch(urlLogin, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

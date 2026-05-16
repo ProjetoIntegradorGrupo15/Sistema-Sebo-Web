@@ -1,7 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
     const tabelaLivros = document.getElementById("tabela-livros");
-    const API_URL = "http://localhost:3000/livros";    
-   
+    const API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+    ? 'http://localhost:3000/livros'
+    : '/livros';
   
     const carregarLivrosGerenciamento = async () => {
         try {

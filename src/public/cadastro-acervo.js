@@ -1,12 +1,14 @@
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("cadastroForm");
   const btnCadastrar = document.getElementById("btnCadastrar");
+  
   btnCancelar.addEventListener("click", () => {
     form.reset();    
     campoId.value = "";    
     const botaoCadastrar = document.getElementById("btnCadastrar");
     botaoCadastrar.disabled = true;
   });
+  
   // Campos
   const campoId = document.getElementById("id");
   const titulo = document.getElementById("titulo");
@@ -18,9 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const preco = document.getElementById("preco");
   const categoria = document.getElementById("categoria");
 
-
   campoId.disabled = true;
-
 
   const forcarMaiusculas = (evento) => {
     evento.target.value = evento.target.value.toUpperCase();
@@ -30,17 +30,13 @@ document.addEventListener("DOMContentLoaded", () => {
     campo.addEventListener("input", forcarMaiusculas);
   });
 
-
   const validarFormulario = () => {
     const radioSelecionado = document.querySelector('input[name="disponivel"]:checked');
    
-  form.addEventListener("reset", () => {  
-    campoId.value = "";  
-
-    setTimeout(validarFormulario, 0);
-  });
-
-    
+    form.addEventListener("reset", () => {  
+      campoId.value = "";  
+      setTimeout(validarFormulario, 0);
+    });
 
     const obrigatoriosPreenchidos = 
       titulo.value.trim() !== "" &&
@@ -53,10 +49,8 @@ document.addEventListener("DOMContentLoaded", () => {
       categoria.value.trim() !== "" &&
       radioSelecionado !== null;
 
-
     btnCadastrar.disabled = !obrigatoriosPreenchidos;
   };
-
 
   form.addEventListener("input", validarFormulario);
 
@@ -80,8 +74,14 @@ document.addEventListener("DOMContentLoaded", () => {
       disponivel: radioSelecionado ? radioSelecionado.value : "NÃO"
     };
 
+    // DEFINIÇÃO INTELIGENTE DA URL DE CADASTRO (Local vs Nuvem)
+    const urlCadastro = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+        ? 'http://localhost:3000/livros'
+        : '/livros';
+
     try {
-      const resposta = await fetch("http://localhost:3000/livros", {
+      // Substituído o endereço fixo pela variável urlCadastro
+      const resposta = await fetch(urlCadastro, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(dadosLivro)

@@ -5,10 +5,18 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-
-const dbPath = path.resolve(process.cwd(), 'database.db');
+// =========================================================================
+// 💾 CONFIGURAÇÃO DO CAMINHO DO SQLITE PARA O RENDER
+// Se estiver no Render (production), salva na pasta do volume permanente (/data/database.db)
+// Se estiver na sua máquina, continua salvando na raiz do projeto (database.db)
+// =========================================================================
+const isProduction = process.env.NODE_ENV === 'production';
+const dbPath = isProduction 
+    ? '/data/database.db' 
+    : path.resolve(process.cwd(), 'database.db');
 
 console.log("🔥 BANCO USADO REALMENTE EM:", dbPath);
+// =========================================================================
 
 const db = new sqlite3.Database(dbPath, (err) => {
     if (err) {
@@ -17,6 +25,7 @@ const db = new sqlite3.Database(dbPath, (err) => {
         console.log('✔ Banco conectado');
     }
 });
+
 db.run(`
     CREATE TABLE IF NOT EXISTS livros (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -26,7 +35,7 @@ db.run(`
         editora TEXT,
         ano INTEGER,
         isbn TEXT,
-           categoria TEXT NOT NULL CHECK (
+        categoria TEXT NOT NULL CHECK (
             categoria IN (
                 'Aventura',
                 'Biografia',
@@ -39,19 +48,17 @@ db.run(`
                 'Outros'
             )
         ),
-
         preco REAL NOT NULL,
-
         disponivel TEXT NOT NULL CHECK(disponivel IN ('Sim', 'Não'))
     )
 `, (err) => {
-
     if (err) {
         console.error('Erro criar tabela de livros', err.message);
     } else {
         console.log('Tabela livros criada com sucesso!');
     }
 });
+
 /* TABELA USUÁRIOS */
 db.run(`
     CREATE TABLE IF NOT EXISTS usuarios (
@@ -68,6 +75,4 @@ db.run(`
     }
 });
 
-
 export default db;
- 
