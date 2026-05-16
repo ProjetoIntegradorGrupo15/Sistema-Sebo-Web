@@ -1,138 +1,70 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <title>Acervo - Acervo Sebos</title>
-  <link rel="stylesheet" href="estillo.css">
+    <meta charset="UTF-8">
+    <title>Acervo - Acervo Sebos</title>
+    <link rel="stylesheet" href="estillo.css">
 </head>
-
 <body>
+  
+    <header class="topo">
+        <nav>
+            <div class="logo">
+                <a href="index.html" class="logo-link">
+                    <img src="imagens/logo.png" alt="logo" class="logo-img">
+                </a>
+            </div>
+            <div class="menu">
+                <a href="principal.html">Home</a>
+                <a href="acervo.html">Acervo</a>
+                <a href="cadastro-acervo.html">Cadastrar Acervo</a>
+                <a href="vendas.html">Vendas</a>
+                <a href="dashboard.html">Dashboard</a>
+                <a href="clientes.html">Clientes</a>
+                <a href="funcionarios.html">Funcionários</a>
+                <a href="index.html" onclick="logout()">Sair</a>
+            </div>
+        </nav>
+    </header>
 
-<!-- MENU DO SISTEMA -->
-<header class="topo">
-  <nav>
+  
+    <section class="hero">
+        <h2>📚 Biblioteca Digital</h2>
+        <p>Explore nossos livros disponíveis</p>
+    </section>
 
-    <div class="logo">
-      <a href="index.html" class="logo-link">
-        <img src="imagens/logo.png" alt="logo" class="logo-img">
-      </a>
-    </div>
-
-    <div class="menu">
-      <a href="principal.html">Home</a>
-      <a href="acervo.html">Acervo</a>
-      <a href="cadastro-acervo.html">Cadastrar Acervo</a>
-      <a href="vendas.html">Vendas</a>
-      <a href="dashboard.html">Dashboard</a>
-      <a href="clientes.html">Clientes</a>
-      <a href="funcionarios.html">Funcionários</a>
-      <a href="index.html" onclick="logout()">Sair</a>
-    </div>
-
-  </nav>
-</header>
+    <!-- BUSCA -->
+        <form id="form" class="form" onsubmit="event.preventDefault();">
+        <div class="container" style="max-width: 800px; margin: 0 auto; padding: 20px;">
+            <label for="search" style="display: block; margin-bottom: 6px; font-weight: bold;">Buscar livros:</label>
+            <div style="display: flex; gap: 10px; width: 100%;">
+                <input type="text" id="search" placeholder="Digite o título ou o autor..." style="flex: 1; margin: 0;">
+                <button type="submit" id="btnBuscar" style="height: auto; padding: 12px 25px; white-space: nowrap;">Enviar</button>
+            </div>
+        </div>
+    </form>
 
 
-<!-- HERO -->
-<section class="hero">
-  <h2>📚 Biblioteca Digital</h2>
-  <p>Explore nossos livros disponíveis</p>
-</section>
+    <!-- CONTEÚDO -->
+    <main class="container">
+        <h2 class="titulo-secao">Livros Disponíveis</h2>        
 
-<!-- BUSCA -->
- 
- <form id="form" class="form">
-<div class="container">
-  <div class="form-content">
-   <label for="nome">Buscar livros:</label>    
-   <input type="text" id="search" placeholder="">
-</div>
-</form> 
-<!-- CONTEÚDO -->
-<main class="container">
+        <div class="livros-grid" id="lista-livros"></div>
+        
+        <p id="nenhum-resultado" style="display:none; text-align: center; font-weight: bold; margin-top: 20px;">
+            Nenhum livro encontrado 😢
+        </p>
+    </main>
+    
 
-  <h2 class="titulo-secao">Livros Disponíveis</h2>
 
-  <div class="livros-grid" id="lista-livros">
+    <footer>
+        <p>© 2026 Acervo Sebos</p>
+    </footer>
 
-    <!-- LIVRO 1 -->
-    <article class="livro-card">
-      <img src="imagens/redes.jpg">
-      <h3 class="titulo">Redes de Computadores</h3>
-      <p class="autor">Tanenbaum</p>
-      <p class="desc">Fundamentos de redes, protocolos e internet.</p>
-      <button onclick="detalhes('Livro de redes, ideal para iniciantes e avançados.')">Ver Detalhes</button>
-    </article>
+    <!-- PROTEÇÃO LOGIN -->
+    <script src="js/auth.js"></script>    
 
-    <!-- LIVRO 2 -->
-    <article class="livro-card">
-      <img src="imagens/algoritmo.jpg">
-      <h3 class="titulo">Entendendo Algoritmos</h3>
-      <p class="autor">Aditya Bhargava</p>
-      <p class="desc">Aprenda algoritmos de forma visual.</p>
-      <button onclick="detalhes('Livro visual que ensina algoritmos de forma simples.')">Ver Detalhes</button>
-    </article>
-
-    <!-- LIVRO 3 -->
-    <article class="livro-card">
-      <img src="imagens/linguagem c.jpg">
-      <h3 class="titulo">Programação em C</h3>
-      <p class="autor">Rodrigo Paes</p>
-      <p class="desc">Base sólida em lógica e programação.</p>
-      <button onclick="detalhes('Livro essencial para quem quer aprender programação.')">Ver Detalhes</button>
-    </article>
-
-  </div>
-
-  <p id="nenhum-resultado" style="display:none;">Nenhum livro encontrado 😢</p>
-
-</main>
-
-<!-- FOOTER -->
-<footer>
-  <p>© 2026 Acervo Sebos</p>
-</footer>
-
-<!-- PROTEÇÃO LOGIN -->
-<script src="js/auth.js"></script>
-
-<!-- SCRIPT -->
-<script>
-
-// LOGOUT
-function logout(){
-  localStorage.removeItem("logado");
-}
-
-// DETALHES
-function detalhes(texto){
-  alert(texto);
-}
-
-// BUSCA
-const search = document.getElementById("search");
-const livros = document.querySelectorAll(".livro-card");
-const msg = document.getElementById("nenhum-resultado");
-
-search.addEventListener("keyup", function(){
-  let valor = search.value.toLowerCase();
-  let encontrou = false;
-
-  livros.forEach(livro => {
-    let titulo = livro.querySelector(".titulo").innerText.toLowerCase();
-
-    if(titulo.includes(valor)){
-      livro.style.display = "block";
-      encontrou = true;
-    } else {
-      livro.style.display = "none";
-    }
-  });
-
-  msg.style.display = encontrou ? "none" : "block";
-});
-
-</script>
-
+    <script src="acervo.js"></script>
 </body>
 </html>
