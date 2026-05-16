@@ -1,7 +1,17 @@
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("cadastroForm");
   const btnCadastrar = document.getElementById("btnCadastrar");
-
+  btnCancelar.addEventListener("click", () => {
+    // 1. Limpa os campos preenchidos
+    form.reset();
+    
+    // 2. Limpa o ID manualmente
+    campoId.value = "";
+    
+    // 3. Bloqueia apenas o botão de cadastrar (usando a classe dele)
+    const botaoCadastrar = document.getElementById("btnCadastrar");
+    botaoCadastrar.disabled = true;
+  });
   // Campos
   const campoId = document.getElementById("id");
   const titulo = document.getElementById("titulo");
@@ -13,10 +23,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const preco = document.getElementById("preco");
   const categoria = document.getElementById("categoria");
 
-  // Garante que o campo ID comece desabilitado na interface
+
   campoId.disabled = true;
 
-  // Função para forçar letras maiúsculas nos campos de texto
+
   const forcarMaiusculas = (evento) => {
     evento.target.value = evento.target.value.toUpperCase();
   };
@@ -25,11 +35,20 @@ document.addEventListener("DOMContentLoaded", () => {
     campo.addEventListener("input", forcarMaiusculas);
   });
 
-  // Função para validar o formulário e liberar o botão cadastrar
+
   const validarFormulario = () => {
     const radioSelecionado = document.querySelector('input[name="disponivel"]:checked');
+   
+  form.addEventListener("reset", () => {
+  
+    campoId.value = "";
     
-    // Verifica se todos os campos obrigatórios possuem conteúdo válido
+
+    setTimeout(validarFormulario, 0);
+  });
+
+    
+
     const obrigatoriosPreenchidos = 
       titulo.value.trim() !== "" &&
       autor.value.trim() !== "" &&
@@ -41,11 +60,11 @@ document.addEventListener("DOMContentLoaded", () => {
       categoria.value.trim() !== "" &&
       radioSelecionado !== null;
 
-    // Habilita ou desabilita o botão baseado na validação
+
     btnCadastrar.disabled = !obrigatoriosPreenchidos;
   };
 
-  // Escuta mudanças em qualquer campo para revalidar o botão
+
   form.addEventListener("input", validarFormulario);
 
   // Executa uma vez no início para garantir o botão desativado de fábrica

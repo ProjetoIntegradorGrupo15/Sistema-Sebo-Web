@@ -295,11 +295,17 @@ button:active {
 }
 
 /* cancelar */
-.btn-cancel {
-  background: #5c0930;
-  text-shadow: 2px 2px 4px #201438;
+.btn-cancelar,
+.btn-cancelar:focus,
+.btn-cancelar:active,
+.btn-cancelar:focus-visible {
+  background: #5c0930 !important;
+  color: white !important; /* Ajuste a cor do texto se necessário */
+  text-shadow: 2px 2px 4px #201438 !important;
+  border: none;
+  outline: none !important;
+  box-shadow: none !important;
 }
-
 /* cadastrar */
 .btn-submit {
   background: #6f42c1;
