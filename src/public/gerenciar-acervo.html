@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Gerenciar Acervo - Acervo Sebos</title>
+    <link rel="stylesheet" href="estillo.css">
+    <style>
+   
+        .tabela-gerenciamento { width: 100%; border-collapse: collapse; margin: 20px 0; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .tabela-gerenciamento th, .tabela-gerenciamento td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
+        .tabela-gerenciamento th { background-color: #f4f4f4; font-weight: bold; }
+        .btn-acao { padding: 6px 12px; border: none; cursor: pointer; border-radius: 4px; font-weight: bold; margin-right: 5px; }
+        .btn-editar { background-color: #ffc107; color: #000; }
+        .btn-excluir { background-color: #dc3545; color: #fff; }
+    </style>
+</head>
+<body>
+  
+    <header class="topo">
+        <nav>
+            <div class="logo">
+                <a href="index.html" class="logo-link">
+                    <img src="imagens/logo.png" alt="logo" class="logo-img">
+                </a>
+            </div>
+            <div class="menu">
+                <a href="principal.html">Home</a>
+                <a href="acervo.html">Acervo</a>
+                <a href="cadastro-acervo.html">Cadastrar Acervo</a>
+                <a href="gerenciar-acervo.html">Gerenciar Acervo</a>
+                <a href="vendas.html">Vendas</a>
+                <a href="dashboard.html">Dashboard</a>
+                <a href="clientes.html">Clientes</a>
+                <a href="funcionarios.html">Funcionários</a>
+                <a href="index.html" onclick="logout()">Sair</a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero" >
+        <h2>⚙️ Controle do Acervo</h2>
+      
+    </section>
+
+    <!-- CONTEÚDO ADMNISTRATIVO -->
+    <main class="container">
+        <h2 class="titulo-secao">Gerenciamento de Livros</h2>        
+
+        <table class="tabela-gerenciamento">
+            <thead>
+                <tr>
+                    <th>Título do Livro</th>
+                    <th>Autor</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody id="tabela-livros">
+          
+            </tbody>
+        </table>
+        
+    </main>
+
+    <footer>
+        <p>© 2026 Acervo Sebos</p>
+    </footer>
+
+    <script src="js/auth.js"></script>    
+    <!-- Novo arquivo JS para controlar as ações da tabela -->
+    <script src="gerenciar-acervo.js"></script> 
+</body>
+</html>

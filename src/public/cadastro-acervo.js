@@ -2,13 +2,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("cadastroForm");
   const btnCadastrar = document.getElementById("btnCadastrar");
   btnCancelar.addEventListener("click", () => {
-    // 1. Limpa os campos preenchidos
-    form.reset();
-    
-    // 2. Limpa o ID manualmente
-    campoId.value = "";
-    
-    // 3. Bloqueia apenas o botão de cadastrar (usando a classe dele)
+    form.reset();    
+    campoId.value = "";    
     const botaoCadastrar = document.getElementById("btnCadastrar");
     botaoCadastrar.disabled = true;
   });
@@ -39,10 +34,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const validarFormulario = () => {
     const radioSelecionado = document.querySelector('input[name="disponivel"]:checked');
    
-  form.addEventListener("reset", () => {
-  
-    campoId.value = "";
-    
+  form.addEventListener("reset", () => {  
+    campoId.value = "";  
 
     setTimeout(validarFormulario, 0);
   });
@@ -67,7 +60,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   form.addEventListener("input", validarFormulario);
 
-  // Executa uma vez no início para garantir o botão desativado de fábrica
   validarFormulario();
 
   // Envio do formulário
@@ -100,7 +92,6 @@ document.addEventListener("DOMContentLoaded", () => {
       if (resposta.ok) {
         alert("Livro cadastrado com sucesso!");
         
-        // Exibe temporariamente o ID gerado pelo SQLite no campo desabilitado
         campoId.value = resultado.id;
         
         // Reseta o restante do formulário após 3 segundos e bloqueia o botão novamente

@@ -11,12 +11,12 @@ form.addEventListener("submit", async (e) => {
 
     // Verifica campos vazios
     inputs.forEach(input => {
-        const erro = input.nextElementSibling; // pega o <a> logo após o input
+        const erro = input.nextElementSibling;
         if (input.value.trim() === "") {
-            erro.style.display = "inline";  // mostra a mensagem
+            erro.style.display = "inline";
             valido = false;
         } else {
-            erro.style.display = "none";   // esconde se preenchido
+            erro.style.display = "none";  
         }
     });
 
@@ -31,9 +31,8 @@ form.addEventListener("submit", async (e) => {
         valido = false;
     }
 
-    if (!valido) return; // não envia para o backend se houver erro
-
-    // Todos os campos preenchidos e senhas corretas → envia para backend
+    if (!valido) return; 
+  
     const nome = document.getElementById("username").value.trim();
     const login = document.getElementById("email").value.trim(); // email será usado como login
 

@@ -228,15 +228,12 @@ button:active {
 .w-small {
   max-width: 100px;
 }
-
 .w-medium {
   max-width: 250px;
 }
-
 .w-large {
   flex: 2;
 }
-
 .flex-fill {
   flex: 1;
 }
@@ -300,7 +297,7 @@ button:active {
 .btn-cancelar:active,
 .btn-cancelar:focus-visible {
   background: #5c0930 !important;
-  color: white !important; /* Ajuste a cor do texto se necessário */
+  color: white !important; 
   text-shadow: 2px 2px 4px #201438 !important;
   border: none;
   outline: none !important;
