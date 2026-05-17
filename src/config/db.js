@@ -10,12 +10,13 @@ const __dirname = path.dirname(__filename);
 // Se estiver no Render (production), salva na pasta do volume permanente (/data/database.db)
 // Se estiver na sua máquina, continua salvando na raiz do projeto (database.db)
 // =========================================================================
-const isProduction = process.env.NODE_ENV === 'production';
+const isProduction = process.env.NODE_ENV === 'production' && process.platform !== 'win32';
+
 const dbPath = isProduction 
     ? '/data/database.db' 
-    : path.resolve(process.cwd(), 'database.db');
+    : path.resolve(process.cwd(), 'database.db'); 
 
-console.log("🔥 BANCO USADO REALMENTE EM:", dbPath);
+console.log(" BANCO DE DADOS ATIVO:", dbPath);
 // =========================================================================
 
 const db = new sqlite3.Database(dbPath, (err) => {

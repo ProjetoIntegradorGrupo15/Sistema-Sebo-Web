@@ -1,3 +1,4 @@
+
 /* RESET E DEFINIÇÕES GERAIS */
 * {
   margin: 0;
@@ -25,15 +26,7 @@ body {
   justify-content: space-between;
   align-items: center;
 }
-nav .logo {
-  display: flex;
-  align-items: center;
-}
 
-.logo-img {
-  height: 80px;
-  width: auto;
-}
 .menu {
   display: flex;
   align-items: center;
@@ -49,7 +42,7 @@ nav .logo {
 .menu a:hover {
   opacity: 0.8;
 }
-nav .logo{
+.nav .logo{
     color: #fff;
     font-size: 40px;
     font-weight: 600;
